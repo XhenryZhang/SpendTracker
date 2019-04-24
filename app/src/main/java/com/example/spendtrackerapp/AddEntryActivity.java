@@ -2,7 +2,6 @@ package com.example.spendtrackerapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DialogTitle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,10 +15,9 @@ public class AddEntryActivity extends AppCompatActivity {
     EditText category;
     EditText date;
     EditText amount;
-    String regex = "^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$";
+    String regex = "^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/(19|20)[0-9]{2}$"; // allows 1900-2099
     Pattern p = Pattern.compile(regex);
     Matcher m;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +27,6 @@ public class AddEntryActivity extends AppCompatActivity {
         category = (EditText) findViewById(R.id.categoryEntry);
         date = (EditText) findViewById(R.id.dateEntry);
         amount = (EditText) findViewById(R.id.amountEntry);
-        m = p.matcher(date.getText().toString().trim());
 
         Button cancel = (Button) findViewById(R.id.cancelButton);
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -43,12 +40,16 @@ public class AddEntryActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                m = p.matcher(date.getText().toString().trim());
                 if (title.getText().length() == 0) {
                     Toast.makeText(getApplicationContext(), "nice pecs bro", Toast.LENGTH_SHORT).show();
-                }else if (amount.getText().length() == 0) {
+                } else if (amount.getText().length() == 0) {
                     Toast.makeText(getApplicationContext(), "something's wrong bro", Toast.LENGTH_SHORT).show();
-                }else if (!(m.matches())) {
+                } else if (!(m.matches())) {
                     Toast.makeText(getApplicationContext(), "what's the time bro", Toast.LENGTH_SHORT).show();
+                } else {
+                    // if all fields have been filled appropriately
+                    Toast.makeText(getApplicationContext(), "pass", Toast.LENGTH_SHORT).show();
                 }
             }
         });
