@@ -15,7 +15,7 @@ public class AddEntryActivity extends AppCompatActivity {
     EditText category;
     EditText date;
     EditText amount;
-    String regex = "^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/(19|20)[0-9]{2}$"; // allows 1900-2099
+    String regex = "^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/(2)[0-9]{3}$"; // allows 1900-2099
     Pattern p = Pattern.compile(regex);
     Matcher m;
 
